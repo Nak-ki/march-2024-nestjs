@@ -10,8 +10,8 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 
 import { ArticlesService } from './articles.service';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
+import { CreateArticleReqDto } from './models/dto/req/create-article.req.dto';
+import { UpdateArticleReqDto } from './models/dto/req/update-article.req.dto';
 
 @ApiTags('articles')
 @Controller('articles')
@@ -19,7 +19,7 @@ export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
   @Post()
-  create(@Body() createArticleDto: CreateArticleDto) {
+  create(@Body() createArticleDto: CreateArticleReqDto) {
     return this.articlesService.create(createArticleDto);
   }
 
@@ -34,7 +34,10 @@ export class ArticlesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateArticleDto: UpdateArticleReqDto,
+  ) {
     return this.articlesService.update(+id, updateArticleDto);
   }
 

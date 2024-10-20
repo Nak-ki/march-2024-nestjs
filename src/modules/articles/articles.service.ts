@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 import { UsersService } from '../users/users.service';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
+import { CreateArticleReqDto } from './models/dto/req/create-article.req.dto';
+import { UpdateArticleReqDto } from './models/dto/req/update-article.req.dto';
 
 @Injectable()
 export class ArticlesService {
@@ -10,7 +10,7 @@ export class ArticlesService {
     private readonly userService: UsersService,
     // private readonly commentsService: CommentsService,
   ) {}
-  create(dto: CreateArticleDto) {
+  create(dto: CreateArticleReqDto) {
     this.userService.checkAbilityToEditArticle('authorId', 'articleId');
     return 'This action adds a new user';
   }
@@ -23,7 +23,7 @@ export class ArticlesService {
     return `This action returns a #${id} article`;
   }
 
-  update(id: number, updateArticleDto: UpdateArticleDto) {
+  update(id: number, updateArticleDto: UpdateArticleReqDto) {
     return `This action updates a #${id} article`;
   }
 
