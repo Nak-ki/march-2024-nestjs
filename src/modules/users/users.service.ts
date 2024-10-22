@@ -7,6 +7,7 @@ import { UserResDto } from './models/dto/res/user.res.dto';
 @Injectable()
 export class UsersService {
   public async create(createUserDto: CreateUserReqDto): Promise<UserResDto> {
+    throw new Error('erroooooor');
     return {} as UserResDto;
   }
 
