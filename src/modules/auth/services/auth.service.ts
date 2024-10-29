@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { isEmail } from 'class-validator';
 
 import { RefreshTokenRepository } from '../../repository/services/refresh-token.repository';
 import { UserRepository } from '../../repository/services/user.repository';
@@ -49,7 +48,10 @@ export class AuthService {
   }
 
   public async signIn(dto: SignInReqDto): Promise<AuthResDto> {
-    const user = await this.userRepository.findOneBy({ email: dto.email });
+    const user = await this.userRepository.findOne({
+      where: { email: dto.email },
+      select: ['id', 'password'],
+    });
     if (!user) {
       throw new UnauthorizedException();
     }
@@ -80,7 +82,9 @@ export class AuthService {
       ),
     ]);
 
-    return { user: UserMapper.toResDto(user), tokens };
+    const userEntity = await this.userRepository.findOneBy({ id: user.id });
+
+    return { user: UserMapper.toResDto(userEntity), tokens };
   }
 
   private async isEmailNotExistOrThrow(email: string) {
