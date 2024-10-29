@@ -11,7 +11,6 @@ export class ArticlesService {
     // private readonly commentsService: CommentsService,
   ) {}
   create(dto: CreateArticleReqDto) {
-    this.userService.checkAbilityToEditArticle('authorId', 'articleId');
     return 'This action adds a new user';
   }
 
