@@ -1,18 +1,22 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { CreateUpdateModel } from './models/create-update.model';
+import { TableNameEnum } from './enums/table-name.enum';
 import { UserEntity } from './user.entity';
 
-@Entity('users')
-export class FollowEntity extends CreateUpdateModel {
+@Entity(TableNameEnum.FOLLOWS)
+export class FollowEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @CreateDateColumn()
+  created: Date;
 
   @Column()
   follower_id: string;

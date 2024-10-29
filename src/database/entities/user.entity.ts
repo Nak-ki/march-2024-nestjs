@@ -49,8 +49,3 @@ export class UserEntity extends CreateUpdateModel {
   @OneToMany(() => FollowEntity, (entity) => entity.following)
   followings?: FollowEntity[];
 }
-
-// @VirtualColumn({
-//   query: () => 'SELECT CONCAT(firstName, lastName) FROM users WHERE id = id',
-// })
-// fullName: string;

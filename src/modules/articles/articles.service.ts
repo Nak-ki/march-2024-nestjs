@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { UsersService } from '../users/users.service';
+import { UsersService } from '../users/services/users.service';
 import { CreateArticleReqDto } from './models/dto/req/create-article.req.dto';
 import { UpdateArticleReqDto } from './models/dto/req/update-article.req.dto';
 

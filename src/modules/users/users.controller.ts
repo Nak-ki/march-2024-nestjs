@@ -6,30 +6,19 @@ import {
   Param,
   ParseUUIDPipe,
   Patch,
-  Post,
-  Query,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiConflictResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { CreateUserReqDto } from './models/dto/req/create-user.req.dto';
 import { UpdateUserReqDto } from './models/dto/req/update-user.req.dto';
-import { UserListReqDto } from './models/dto/req/users-list.req.dto';
-import { UserResDto } from './models/dto/res/user.res.dto';
-import { UsersService } from './users.service';
+import { UsersService } from './services/users.service';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @ApiConflictResponse({ description: 'Conflict' })
-  @Post()
-  async create(@Body() createUserDto: CreateUserReqDto): Promise<UserResDto> {
-    return await this.usersService.create(createUserDto);
-  }
-
   @Get()
-  findAll(@Query() query: UserListReqDto) {
+  findAll() {
     return this.usersService.findAll();
   }
 

@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { UsersAdminService } from './users-admin.service';
+import { UsersAdminService } from './services/users-admin.service';
 
 @ApiTags('UsersAdmin')
 @Controller('users-admin')
