@@ -32,10 +32,11 @@ export class JwtRefreshGuard implements CanActivate {
     if (!payload) {
       throw new UnauthorizedException();
     }
-    const isRefreshTokenExist = await this.refreshTokenRepository.findOneBy({
-      deviceId: payload.deviceId,
-      user_id: payload.userId,
-    });
+    const isRefreshTokenExist =
+      await this.refreshTokenRepository.isRefreshTokenExist(refreshToken);
+    if (!isRefreshTokenExist) {
+      throw new UnauthorizedException();
+    }
     if (!isRefreshTokenExist) {
       throw new UnauthorizedException();
     }
